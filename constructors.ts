@@ -1,5 +1,6 @@
 import { any, int, string, tuple } from "./types";
 
+/*
 export const constructors = {
   //entities
   Citizen: {
@@ -23,20 +24,76 @@ export const constructors = {
     entities: tuple([int, int], any),
   },
 } as const;
+ */
 
-export const constructors_keys = Object.keys(constructors) as ObjectKeysToTuple<
-  typeof constructors
->;
+export const constructors = [
+  //entities
+  [
+    "Citizen",
+    [
+      ["sid", int],
+      ["x", int],
+      ["y", int],
+      ["name", string],
+    ],
+  ],
+  ["Entity", [["sid", int]]],
 
-export const constructors_inner_keys = Object.fromEntries(
-  constructors_keys.map((key) => [key, Object.keys(constructors[key])])
-) as {
-  [K in keyof typeof constructors]: ObjectKeysToTuple<(typeof constructors)[K]>;
+  //packets
+  ["update", [["entities", tuple([int, int], any)]]],
+  [
+    "pointer",
+    [
+      ["x", int],
+      ["y", int],
+    ],
+  ],
+] as const;
+
+type ConstructorsToObject<
+  T extends readonly (readonly [string, readonly (readonly [string, any])[]])[]
+> = {
+  [K in T[number][0]]: {
+    [P in Extract<T[number], readonly [K, any]>[1][number] as P[0]]: P[1];
+  };
 };
 
-export type Constructors = {
-  [K in keyof typeof constructors]: {
-    [P in keyof (typeof constructors)[K]]: (typeof constructors)[K][P] extends {
+export const constructors_object = Object.fromEntries(
+  constructors.map(([constructor, props]) => [
+    constructor,
+    Object.fromEntries(props),
+  ])
+) as ConstructorsToObject<typeof constructors>;
+
+type ExtractConstructorNames<T> = T extends readonly [infer Head, ...infer Tail]
+  ? Head extends readonly [infer Name, any]
+    ? [Name, ...ExtractConstructorNames<Tail>]
+    : never
+  : [];
+
+export const constructors_keys = constructors.map(
+  ([name]) => name
+) as ExtractConstructorNames<typeof constructors>;
+
+type ExtractProps<T> = T extends readonly (readonly [infer _, any])[]
+  ? { [K in keyof T]: T[K] extends readonly [infer Name, any] ? Name : never }
+  : never;
+
+type GetConstructorsInnerKeys<T extends readonly (readonly [string, any])[]> = {
+  [K in T[number] as K[0]]: ExtractProps<K[1]>;
+};
+
+export const constructors_inner_keys = Object.fromEntries(
+  constructors.map(([name, props]) => [
+    name,
+    // Use double assertion to preserve tuple type
+    props.map(([n]) => n) as unknown as ExtractProps<typeof props>,
+  ])
+) as GetConstructorsInnerKeys<typeof constructors>;
+
+export type ConstructorsObject = {
+  [K in keyof typeof constructors_object]: {
+    [P in keyof (typeof constructors_object)[K]]: (typeof constructors_object)[K][P] extends {
       // Extract the first function's input type
       0: (val: infer T) => any;
     }
@@ -44,6 +101,39 @@ export type Constructors = {
       : never;
   };
 };
+
+type ExtractNetworkedType<T> = T extends readonly [
+  infer Conv extends (...args: any) => any,
+  any
+]
+  ? Parameters<Conv>[0]
+  : T extends (...args: any) => infer R
+  ? ExtractNetworkedType<R>
+  : never;
+
+type MapConstructor<T> = T extends readonly [infer Name, infer Props]
+  ? [
+      Name,
+      Props extends readonly (readonly [infer PName, infer Type])[]
+        ? {
+            [K in keyof Props]: Props[K] extends readonly [infer PN, infer T]
+              ? [PN, ExtractNetworkedType<T>]
+              : never;
+          }
+        : never
+    ]
+  : never;
+
+type ConstructorsToNetworkedArray<T extends readonly any[]> = {
+  [K in keyof T]: MapConstructor<T[K]>;
+};
+
+// Usage with your constructors array:
+export type Constructors = ConstructorsToNetworkedArray<typeof constructors>;
+
+export type ConstructorsInnerKeys = GetConstructorsInnerKeys<Constructors>;
+
+/*
 
 export type UnionToTuple<T> = (
   (T extends any ? (t: T) => T : never) extends infer U
@@ -62,3 +152,4 @@ export type ObjectValuesToTuple<T extends object> = UnionToTuple<
 > extends infer Keys extends Array<keyof T>
   ? { [K in keyof Keys]: T[Keys[K]] }
   : never;
+*/

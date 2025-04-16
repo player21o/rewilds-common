@@ -1,3 +1,3 @@
-import { Constructors } from "./constructors";
+import { ConstructorsObject } from "./constructors";
 
-export type CitizenType = Constructors["Citizen"];
+export type CitizenType = ConstructorsObject["Citizen"];

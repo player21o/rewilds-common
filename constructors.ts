@@ -1,4 +1,4 @@
-import { int, string } from "./types";
+import { array, int, string } from "./types";
 
 export const constructors = {
   //entities
@@ -9,10 +9,18 @@ export const constructors = {
     name: string,
   },
 
+  Entity: {
+    sid: int,
+  },
+
   //packets
   pointer: {
     x: int,
     y: int,
+  },
+
+  update: {
+    entities: array(int),
   },
 } as const;
 

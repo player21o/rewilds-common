@@ -1,4 +1,4 @@
-import { array, int, string } from "./types";
+import { any, int, string, tuple } from "./types";
 
 export const constructors = {
   //entities
@@ -20,7 +20,7 @@ export const constructors = {
   },
 
   update: {
-    entities: array(int),
+    entities: tuple([int, int], any),
   },
 } as const;
 
@@ -34,3 +34,21 @@ export type Constructors = {
       : never;
   };
 };
+
+export type UnionToTuple<T> = (
+  (T extends any ? (t: T) => T : never) extends infer U
+    ? (U extends any ? (u: U) => any : never) extends (v: infer V) => any
+      ? V
+      : never
+    : never
+) extends (_: any) => infer W
+  ? [...UnionToTuple<Exclude<T, W>>, W]
+  : [];
+
+export type ObjectKeysToTuple<T extends object> = UnionToTuple<keyof T>;
+
+export type ObjectValuesToTuple<T extends object> = UnionToTuple<
+  keyof T
+> extends infer Keys extends Array<keyof T>
+  ? { [K in keyof Keys]: T[Keys[K]] }
+  : never;

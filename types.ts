@@ -22,7 +22,67 @@ export const array = <
   (val: Array<Parameters<T[1]>[0]>) => Array<ReturnType<T[1]>>
 ] => {
   return [
-    (val) => val.map((v) => type[0](v)),
-    (val) => val.map((v) => type[1](v)),
+    (val) => {
+      const r = [];
+
+      for (let i = 0, n = val.length; i < n; ++i) {
+        r.push(type[0](val[i]));
+      }
+
+      return r;
+    },
+    (val) => {
+      const r = [];
+
+      for (let i = 0, n = val.length; i < n; ++i) {
+        r.push(type[1](val[i]));
+      }
+
+      return r;
+    },
   ];
 };
+
+//dont ask me wtf is this (author - deepseek)
+
+type Networkable<T = any> = readonly [(arg: T) => any, (arg: any) => T];
+
+export function tuple<
+  T extends Networkable[],
+  R extends Networkable | undefined = undefined
+>(
+  types: [...T],
+  rest?: R
+): [
+  (
+    val: [
+      ...{ [K in keyof T]: Parameters<T[K][0]>[0] },
+      ...(R extends Networkable ? Parameters<R[0]>[0][] : [])
+    ]
+  ) => [
+    ...{ [K in keyof T]: ReturnType<T[K][0]> },
+    ...(R extends Networkable ? ReturnType<R[0]>[] : [])
+  ],
+  (
+    val: [
+      ...{ [K in keyof T]: Parameters<T[K][1]>[0] },
+      ...(R extends Networkable ? Parameters<R[1]>[0][] : [])
+    ]
+  ) => [
+    ...{ [K in keyof T]: ReturnType<T[K][1]> },
+    ...(R extends Networkable ? ReturnType<R[1]>[] : [])
+  ]
+] {
+  return [
+    (val) =>
+      [
+        ...val.slice(0, types.length).map((v, i) => types[i][0](v)),
+        ...(rest ? val.slice(types.length).map((v) => rest[0](v)) : []),
+      ] as any,
+    (val) =>
+      [
+        ...val.slice(0, types.length).map((v, i) => types[i][1](v)),
+        ...(rest ? val.slice(types.length).map((v) => rest[1](v)) : []),
+      ] as any,
+  ];
+}

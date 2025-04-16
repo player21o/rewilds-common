@@ -24,6 +24,16 @@ export const constructors = {
   },
 } as const;
 
+export const constructors_keys = Object.keys(constructors) as ObjectKeysToTuple<
+  typeof constructors
+>;
+
+export const constructors_inner_keys = Object.fromEntries(
+  constructors_keys.map((key) => [key, Object.keys(constructors[key])])
+) as {
+  [K in keyof typeof constructors]: ObjectKeysToTuple<(typeof constructors)[K]>;
+};
+
 export type Constructors = {
   [K in keyof typeof constructors]: {
     [P in keyof (typeof constructors)[K]]: (typeof constructors)[K][P] extends {

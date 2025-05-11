@@ -1,4 +1,4 @@
-import { any, int, string, tuple } from "./types";
+import { any, array, int, string, tuple } from "./types";
 
 export const constructors = [
   //entities
@@ -14,7 +14,7 @@ export const constructors = [
   ["Entity", [["sid", int]]],
 
   //packets
-  ["update", [["entities", tuple([int, int], any)]]],
+  ["update", [["entities", array(tuple([int, int], any))]]],
   [
     "pointer",
     [

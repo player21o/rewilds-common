@@ -15,7 +15,7 @@ export const constructors = [
 
   //packets
   ["update", [["entities", array(tuple([int, int], any))]]],
-  ["snapshot", [["entities", array(tuple([int], any))]]],
+  ["snapshot", [["entities", array(tuple([int, int], any))]]],
   [
     "pointer",
     [

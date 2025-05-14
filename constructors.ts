@@ -24,6 +24,7 @@ export const constructors = [
     ],
   ],
   ["hello", []],
+  ["keys", [["keys", int]]],
 ] as const;
 
 export const constructors_object = Object.fromEntries(

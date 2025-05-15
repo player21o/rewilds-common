@@ -6,6 +6,11 @@ export const int = [
   (val: number): number => val,
 ] as const;
 
+export const sfloat = [
+  (val: number): number => (val * 10) | 0,
+  (val: number): number => val / 10,
+] as const;
+
 export const string = [
   (val: string): string => val.toString(),
   (val: string): string => val,

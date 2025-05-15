@@ -1,4 +1,4 @@
-import { any, array, int, string, tuple } from "./types";
+import { any, array, int, sfloat, string, tuple } from "./types";
 
 export const constructors = [
   //entities
@@ -9,6 +9,8 @@ export const constructors = [
       ["x", int],
       ["y", int],
       ["name", string],
+      ["direction", sfloat],
+      ["health", sfloat],
     ],
   ],
   ["Entity", [["sid", int]]],

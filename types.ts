@@ -16,7 +16,9 @@ export const string = [
   (val: string): string => val,
 ] as const;
 
-export const any = [(val: any): any => val, (val: any): any => val] as const;
+export function any<T = any>() {
+  return [(val: T): T => val, (val: T): T => val] as const;
+}
 
 export const enumerated = <const V extends readonly unknown[]>(
   allowedValues: V

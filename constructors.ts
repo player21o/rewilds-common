@@ -12,13 +12,14 @@ export const constructors = [
       ["direction", sfloat],
       ["health", sfloat],
       ["team", enumerated([0, 1, 2])],
+      ["state", enumerated(["idle", "charge"])],
     ],
   ],
   ["Entity", [["sid", int]]],
 
   //packets
-  ["update", [["entities", array(tuple([int, int], any))]]],
-  ["snapshot", [["entities", array(tuple([int, int], any))]]],
+  ["update", [["entities", array(tuple([int, int], any()))]]],
+  ["snapshot", [["entities", array(tuple([int, int], any()))]]],
   ["your_sid", [["sid", int]]],
   [
     "pointer",

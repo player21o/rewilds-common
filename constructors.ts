@@ -1,4 +1,4 @@
-import { any, array, int, sfloat, string, tuple } from "./types";
+import { any, array, enumerated, int, sfloat, string, tuple } from "./types";
 
 export const constructors = [
   //entities
@@ -11,6 +11,7 @@ export const constructors = [
       ["name", string],
       ["direction", sfloat],
       ["health", sfloat],
+      ["team", enumerated([0, 1, 2])],
     ],
   ],
   ["Entity", [["sid", int]]],

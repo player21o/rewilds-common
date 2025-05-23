@@ -18,6 +18,20 @@ export const string = [
 
 export const any = [(val: any): any => val, (val: any): any => val] as const;
 
+export const enumerated = <const V extends readonly unknown[]>(
+  allowedValues: V
+): [(value: V[number]) => number, (index: number) => V[number]] => {
+  return [
+    (value: V[number]): number => {
+      const index = allowedValues.indexOf(value);
+      return index;
+    },
+    (index: number): V[number] => {
+      return allowedValues[index];
+    },
+  ] as const;
+};
+
 export const array = <
   T extends readonly [(arg: any) => any, (arg: any) => any]
 >(

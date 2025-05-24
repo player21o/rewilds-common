@@ -20,6 +20,10 @@ export const constructors = [
   //packets
   ["update", [["entities", array(tuple([int, int], any()))]]],
   ["snapshot", [["entities", array(tuple([int, int], any()))]]],
+  [
+    "action",
+    [["action", enumerated(["growl_start", "growl_stop", "attack", "jump"])]],
+  ],
   ["your_sid", [["sid", int]]],
   [
     "pointer",

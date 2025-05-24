@@ -12,7 +12,7 @@ export const constructors = [
       ["direction", sfloat],
       ["health", sfloat],
       ["team", enumerated([0, 1, 2])],
-      ["state", enumerated(["idle", "charge"])],
+      ["state", enumerated(["idle", "charge", "growl"])],
     ],
   ],
   ["Entity", [["sid", int]]],

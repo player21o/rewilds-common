@@ -16,6 +16,7 @@ export const constructors = [
     ],
   ],
   ["Entity", [["sid", int]]],
+  ["CitizenPrivateData", [["stamina", sfloat]]],
 
   //packets
   ["update", [["entities", array(tuple([int, int], any()))]]],
@@ -34,6 +35,13 @@ export const constructors = [
   ],
   ["hello", []],
   ["keys", [["keys", int]]],
+  [
+    "private",
+    [
+      ["bits", int],
+      ["data", array(any())],
+    ],
+  ],
 ] as const;
 
 export const constructors_object = Object.fromEntries(

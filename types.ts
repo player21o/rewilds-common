@@ -6,6 +6,11 @@ export const int = [
   (val: number): number => val,
 ] as const;
 
+export const bool = [
+  (val: boolean): number => (val ? 1 : 0),
+  (val: number): boolean => !!+val,
+] as const;
+
 export const sfloat = [
   (val: number): number => (val * 10) | 0,
   (val: number): number => val / 10,

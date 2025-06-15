@@ -1,4 +1,13 @@
-import { any, array, enumerated, int, sfloat, string, tuple } from "./types";
+import {
+  any,
+  array,
+  bool,
+  enumerated,
+  int,
+  sfloat,
+  string,
+  tuple,
+} from "./types";
 
 export const constructors = [
   //entities
@@ -14,6 +23,7 @@ export const constructors = [
       ["team", enumerated([0, 1, 2])],
       ["state", enumerated(["idle", "charge", "growl", "attack"])],
       ["gender", enumerated(["male", "female"])],
+      ["moving", bool],
     ],
   ],
   ["Entity", [["sid", int]]],

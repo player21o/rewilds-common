@@ -9,23 +9,28 @@ import {
   tuple,
 } from "./types";
 
+const weapons = enumerated(["no_weapon", "axe"]);
+
+const Citizen = [
+  ["sid", int],
+  ["direction", sfloat],
+  ["x", int],
+  ["y", int],
+  ["moving", bool],
+  ["state", enumerated(["idle", "charge", "growl", "attack"])],
+  ["health", sfloat],
+  ["name", string],
+  ["maxHealth", sfloat],
+  ["maxStamina", sfloat],
+  ["team", enumerated([0, 1, 2])],
+  ["gender", enumerated(["male", "female"])],
+  ["weapon", weapons],
+] as const;
+
 export const constructors = [
   //entities
-  [
-    "Citizen",
-    [
-      ["sid", int],
-      ["x", int],
-      ["y", int],
-      ["name", string],
-      ["direction", sfloat],
-      ["health", sfloat],
-      ["team", enumerated([0, 1, 2])],
-      ["state", enumerated(["idle", "charge", "growl", "attack"])],
-      ["gender", enumerated(["male", "female"])],
-      ["moving", bool],
-    ],
-  ],
+  ["Citizen", Citizen],
+  ["Orc", [...Citizen]],
   ["Entity", [["sid", int]]],
   ["CitizenPrivateData", [["stamina", sfloat]]],
 

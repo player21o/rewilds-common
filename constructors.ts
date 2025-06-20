@@ -21,7 +21,6 @@ const Citizen = [
   ["health", sfloat],
   ["name", string],
   ["maxHealth", sfloat],
-  ["maxStamina", sfloat],
   ["team", enumerated([0, 1, 2])],
   ["gender", enumerated(["male", "female"])],
   ["weapon", weapons],

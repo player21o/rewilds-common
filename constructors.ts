@@ -10,6 +10,7 @@ import {
 } from "./types";
 
 const weapons = enumerated(["no_weapon", "axe"]);
+const shields = enumerated(["no_shield", "shield_wooden"]);
 
 const Citizen = [
   ["sid", int],
@@ -17,13 +18,15 @@ const Citizen = [
   ["x", int],
   ["y", int],
   ["moving", bool],
-  ["state", enumerated(["idle", "charge", "growl", "attack"])],
+  ["state", enumerated(["idle", "charge", "attack"])],
+  ["growling", bool],
   ["health", sfloat],
   ["name", string],
   ["maxHealth", sfloat],
   ["team", enumerated([0, 1, 2])],
   ["gender", enumerated(["male", "female"])],
   ["weapon", weapons],
+  ["shield", shields],
 ] as const;
 
 export const constructors = [

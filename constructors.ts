@@ -1,3 +1,4 @@
+import constants from "./constants";
 import {
   any,
   array,
@@ -11,6 +12,11 @@ import {
 
 const weapons = enumerated(["no_weapon", "axe"]);
 const shields = enumerated(["no_shield", "shield_wooden"]);
+const citizen_types = enumerated(
+  Object.keys(
+    constants.minions
+  ) as any as (keyof (typeof constants)["minions"])[]
+);
 
 const Citizen = [
   ["sid", int],
@@ -27,6 +33,7 @@ const Citizen = [
   ["gender", enumerated(["male", "female"])],
   ["weapon", weapons],
   ["shield", shields],
+  ["type", citizen_types],
 ] as const;
 
 export const constructors = [

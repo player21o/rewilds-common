@@ -39,7 +39,6 @@ const Citizen = [
 export const constructors = [
   //entities
   ["Citizen", Citizen],
-  ["Orc", [...Citizen]],
   ["Entity", [["sid", int]]],
   ["CitizenPrivateData", [["stamina", sfloat]]],
 

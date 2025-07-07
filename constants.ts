@@ -27,4 +27,14 @@ export default {
       attackDuration: 1.0,
     },
   },
+  weapons: {
+    axe: {
+      attackAnimations: ["attack_horizontal", "attack_vertical"],
+      attackDuration: 0.5,
+    },
+    no_weapon: {
+      attackAnimations: ["punch1", "punch2"],
+      attackDuration: 0.25,
+    },
+  },
 } as const;

@@ -31,10 +31,12 @@ export default {
     axe: {
       attackAnimations: ["attack_horizontal", "attack_vertical"],
       attackDuration: 0.5,
+      meleeSlash: ["slash_attack_horizontal", "slash_attack_vertical"],
     },
     no_weapon: {
       attackAnimations: ["punch1", "punch2"],
       attackDuration: 0.25,
+      meleeSlash: ["slash_punch1", "slash_punch2"],
     },
   },
 } as const;

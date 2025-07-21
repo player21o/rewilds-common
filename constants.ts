@@ -31,7 +31,7 @@ export default {
     axe: {
       attackAnimations: ["attack_horizontal", "attack_vertical"],
       attackDuration: 0.5,
-      meleeSlash: ["slash_attack_horizontal", "slash_attack_vertical"],
+      meleeSlash: ["slash_horizontal", "slash_vertical"],
       slashColor: "#fff",
       meleeRange: 40,
     },

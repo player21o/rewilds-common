@@ -32,11 +32,15 @@ export default {
       attackAnimations: ["attack_horizontal", "attack_vertical"],
       attackDuration: 0.5,
       meleeSlash: ["slash_attack_horizontal", "slash_attack_vertical"],
+      slashColor: "#fff",
+      meleeRange: 40,
     },
     no_weapon: {
       attackAnimations: ["punch1", "punch2"],
       attackDuration: 0.25,
       meleeSlash: ["slash_punch1", "slash_punch2"],
+      slashColor: "#fff",
+      meleeRange: 30,
     },
   },
 } as const;

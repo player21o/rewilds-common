@@ -29,9 +29,13 @@ export default {
   },
   weapons: {
     axe: {
-      attackAnimations: ["attack_horizontal", "attack_vertical"],
+      attackAnimations: [
+        "attack_horizontal",
+        "attack_vertical",
+        "dual_wield_attack_1",
+      ],
       attackDuration: 0.5,
-      meleeSlash: ["slash_horizontal", "slash_vertical"],
+      meleeSlash: ["slash_horizontal", "slash_vertical", "slash_dual_right"],
       slashColor: "#fff",
       meleeRange: 40,
     },

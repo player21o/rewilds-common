@@ -39,6 +39,7 @@ export default {
       slashColor: "#fff",
       meleeRange: 40,
       meleeArc: Math.PI,
+      meleeDamage: 2,
     },
     no_weapon: {
       attackAnimations: ["punch1", "punch2"],
@@ -47,6 +48,7 @@ export default {
       slashColor: "#fff",
       meleeRange: 30,
       meleeArc: Math.PI * 0.5,
+      meleeDamage: 0.5,
     },
   },
 } as const;

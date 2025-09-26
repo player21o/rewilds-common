@@ -24,7 +24,7 @@ const Citizen = [
   ["x", int],
   ["y", int],
   ["moving", bool],
-  ["state", enumerated(["idle", "charge", "attack"])],
+  ["state", enumerated(["idle", "charge", "attack", "dead", "dying"])],
   ["growling", bool],
   ["health", sfloat],
   ["name", string],

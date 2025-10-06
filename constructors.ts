@@ -24,7 +24,18 @@ const Citizen = [
   ["x", int],
   ["y", int],
   ["moving", bool],
-  ["state", enumerated(["idle", "charge", "attack", "dead", "dying"])],
+  [
+    "state",
+    enumerated([
+      "idle",
+      "charge",
+      "attack",
+      "dead",
+      "dying",
+      "block",
+      "stunned",
+    ]),
+  ],
   ["growling", bool],
   ["health", sfloat],
   ["name", string],
@@ -47,7 +58,12 @@ export const constructors = [
   ["snapshot", [["entities", array(tuple([int, int], any()))]]],
   [
     "action",
-    [["action", enumerated(["growl_start", "growl_stop", "attack", "jump"])]],
+    [
+      [
+        "action",
+        enumerated(["growl_start", "growl_stop", "attack", "jump", "block"]),
+      ],
+    ],
   ],
   ["your_sid", [["sid", int]]],
   [

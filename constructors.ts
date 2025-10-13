@@ -82,6 +82,14 @@ export const constructors = [
       ["data", array(any())],
     ],
   ],
+  ["clash_shield", [["sid", int]]],
+  [
+    "clash_weapons",
+    [
+      ["sid1", int],
+      ["sid2", int],
+    ],
+  ],
 ] as const;
 
 export const constructors_object = Object.fromEntries(

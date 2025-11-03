@@ -55,7 +55,7 @@ export const constructors = [
     "CitizenPrivateData",
     [
       ["stamina", sfloat],
-      ["charge", sfloat],
+      ["charge", bool],
     ],
   ],
 

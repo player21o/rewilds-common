@@ -34,6 +34,7 @@ const Citizen = [
       "dying",
       "block",
       "stunned",
+      "spin",
     ]),
   ],
   ["growling", bool],

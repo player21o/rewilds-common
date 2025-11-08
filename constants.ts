@@ -40,6 +40,9 @@ export default {
       meleeRange: 40,
       meleeArc: Math.PI,
       meleeDamage: 2,
+      chargeTime: 0.6,
+      chargeStaminaUsage: 0.5,
+      onCharged: "spin",
     },
     no_weapon: {
       attackAnimations: ["punch1", "punch2"],
@@ -49,6 +52,9 @@ export default {
       meleeRange: 30,
       meleeArc: Math.PI * 0.5,
       meleeDamage: 0.5,
+      chargeStaminaUsage: 0.5,
+      chargeTime: 0.6,
+      onCharged: "spin",
     },
   },
 } as const;

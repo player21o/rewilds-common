@@ -33,7 +33,7 @@ const Citizen = [
   ["name", string],
   ["maxHealth", sfloat],
   ["team", enumerated([0, 1, 2])],
-  ["gender", enumerated(["male", "female"])],
+  ["kind", enumerated(["male", "female"])],
   ["weapon", weapons],
   ["shield", shields],
   ["type", citizen_types],

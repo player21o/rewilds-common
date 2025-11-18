@@ -35,6 +35,7 @@ const Citizen = [
       "stunned",
       "spin",
       "roll",
+      "kick",
     ]),
   ],
   ["growling", bool],
@@ -144,7 +145,7 @@ export type ConstructorsInnerKeys = GetConstructorsInnerKeys<Constructors>;
 export type ConstructorsInnerTypes = GetConstructorsInnerTypes<Constructors>;
 
 type ConstructorsToObject<
-  T extends readonly (readonly [string, readonly (readonly [string, any])[]])[],
+  T extends readonly (readonly [string, readonly (readonly [string, any])[]])[]
 > = {
   [K in T[number][0]]: {
     [P in Extract<T[number], readonly [K, any]>[1][number] as P[0]]: P[1];
@@ -167,12 +168,12 @@ type GetConstructorsInnerTypes<T extends readonly any[]> = {
 
 type ExtractNetworkedType<T> = T extends readonly [
   infer Conv extends (...args: any) => any,
-  any,
+  any
 ]
   ? Parameters<Conv>[0]
   : T extends (...args: any) => infer R
-    ? ExtractNetworkedType<R>
-    : never;
+  ? ExtractNetworkedType<R>
+  : never;
 
 type MapConstructor<T> = T extends readonly [infer Name, infer Props]
   ? [
@@ -183,7 +184,7 @@ type MapConstructor<T> = T extends readonly [infer Name, infer Props]
               ? [PN, ExtractNetworkedType<T>]
               : never;
           }
-        : never,
+        : never
     ]
   : never;
 
